@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: jellyfin
+  name: jellyfin
+  namespace: home-media
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jellyfin
+  template:
+    metadata:
+      labels:
+        app: jellyfin
+    spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+      volumes:
+        - name: config-volume
+          persistentVolumeClaim: 
+            claimName: pvc-config
+        - name: cache-volume
+          persistentVolumeClaim: 
+            claimName: pvc-cache
+      containers:
+        - image: jellyfin/jellyfin:2026010505
+          name: jellyfin
+          resources:
+            requests:
+              cpu: "250m" 
+              memory: "500Mi"
+          volumeMounts:
+            - name: config-volume
+              mountPath: /config
+            - name: cache-volume
+              mountPath: /cache
