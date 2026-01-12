@@ -16,9 +16,8 @@ spec:
         app: jellyfin
     spec:
       securityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
         fsGroup: 1000
+        fsGroupChangePolicy: "OnRootMismatch"
       volumes:
         - name: config-volume
           persistentVolumeClaim: 
@@ -26,9 +25,16 @@ spec:
         - name: cache-volume
           persistentVolumeClaim: 
             claimName: pvc-cache
+        - name: media-volume
+          persistentVolumeClaim:
+            claimName: pvc-media
       containers:
         - image: jellyfin/jellyfin:2026010505
           name: jellyfin
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            allowPrivilegeEscalation: false
           resources:
             requests:
               cpu: "250m" 
@@ -38,3 +44,5 @@ spec:
               mountPath: /config
             - name: cache-volume
               mountPath: /cache
+            - name: media-volume
+              mountPath: /media
