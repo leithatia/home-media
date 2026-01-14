@@ -4,7 +4,7 @@ metadata:
   labels:
     app: jellyfin
   name: jellyfin
-  namespace: home-media
+  namespace: {{ .Values.namespace }}
 spec:
   replicas: 1
   selector:
@@ -29,8 +29,8 @@ spec:
           persistentVolumeClaim:
             claimName: pvc-media
       containers:
-        - image: jellyfin/jellyfin:2026010505
-          imagePullPolicy: IfNotPresent
+        - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           name: jellyfin
           securityContext:
             runAsUser: 1000
@@ -38,8 +38,8 @@ spec:
             allowPrivilegeEscalation: false
           resources:
             requests:
-              cpu: "250m" 
-              memory: "500Mi"
+              cpu: {{ .Values.resources.cpu | quote }}
+              memory: {{ .Values.resources.memory | quote }}
           volumeMounts:
             - name: config-volume
               mountPath: /config

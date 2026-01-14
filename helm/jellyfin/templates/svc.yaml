@@ -6,12 +6,12 @@ metadata:
   name: jellyfin
   namespace: home-media
 spec:
-  type: ClusterIP
+  type: {{ .Values.service.type }}
   ports:
-  - port: 8096
+  - port: {{ .Values.service.port }}
     protocol: TCP
-    targetPort: 8096
-    nodePort: 30096
+    targetPort: {{ .Values.service.port }}
+    nodePort: {{ .Values.service.nodePort }}
   selector:
     app: jellyfin
   type: NodePort

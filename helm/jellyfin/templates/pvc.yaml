@@ -4,12 +4,12 @@ metadata:
   name: pvc-config
   namespace: home-media
 spec:
-  storageClassName: standard
+  storageClassName: {{ .Values.persistence.storageClassName }}
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 5Gi
+      storage: {{ .Values.persistence.configSize | quote }}
 
 ---
 
@@ -19,12 +19,12 @@ metadata:
   name: pvc-cache
   namespace: home-media
 spec:
-  storageClassName: standard
+  storageClassName: {{ .Values.persistence.storageClassName }}
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 5Gi
+      storage: {{ .Values.persistence.cacheSize | quote }}
 
 ---
 
@@ -34,9 +34,9 @@ metadata:
   name: pvc-media
   namespace: home-media
 spec:
-  storageClassName: standard
+  storageClassName: {{ .Values.persistence.storageClassName }}
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 20Gi
+      storage: {{ .Values.persistence.mediaSize | quote }}
