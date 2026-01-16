@@ -29,7 +29,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: pvc-media
+  name: pvc-movies
 spec:
   storageClassName: {{ .Values.persistence.storageClassName }}
   accessModes:

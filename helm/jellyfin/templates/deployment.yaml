@@ -24,9 +24,9 @@ spec:
         - name: cache-volume
           persistentVolumeClaim: 
             claimName: pvc-cache
-        - name: media-volume
+        - name: movies-volume
           persistentVolumeClaim:
-            claimName: pvc-media
+            claimName: pvc-movies
         - name: pe-volume
           persistentVolumeClaim:
             claimName: pvc-pe-audio
@@ -47,8 +47,8 @@ spec:
               mountPath: /config
             - name: cache-volume
               mountPath: /cache
-            - name: media-volume
-              mountPath: /media
+            - name: movies-volume
+              mountPath: /media/movies
             - name: pe-volume
               mountPath: /media/pe-audio
               readOnly: true
