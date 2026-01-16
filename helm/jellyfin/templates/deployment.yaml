@@ -27,6 +27,9 @@ spec:
         - name: media-volume
           persistentVolumeClaim:
             claimName: pvc-media
+        - name: pe-volume
+          persistentVolumeClaim:
+            claimName: pvc-pe-audio
       containers:
         - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
@@ -46,5 +49,8 @@ spec:
               mountPath: /cache
             - name: media-volume
               mountPath: /media
+            - name: pe-volume
+              mountPath: /media/pe-audio
+              readOnly: true
   strategy:
     type: Recreate
