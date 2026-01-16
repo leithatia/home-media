@@ -10,9 +10,9 @@ resources:
 
 persistence:
   storageClassName: standard
-  configSize: 5Gi
-  cacheSize: 5Gi
-  mediaSize: 20Gi
+  configSize: "5Gi"
+  cacheSize: "5Gi"
+  mediaSize: "20Gi"
 
 service:
   type: ClusterIP
