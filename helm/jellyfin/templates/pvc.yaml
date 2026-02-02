@@ -3,7 +3,6 @@ kind: PersistentVolumeClaim
 metadata:
   name: pvc-config
 spec:
-  storageClassName: {{ .Values.persistence.storageClassName }}
   accessModes:
     - ReadWriteOnce
   resources:
@@ -17,7 +16,6 @@ kind: PersistentVolumeClaim
 metadata:
   name: pvc-cache
 spec:
-  storageClassName: {{ .Values.persistence.storageClassName }}
   accessModes:
     - ReadWriteOnce
   resources:
@@ -31,7 +29,6 @@ kind: PersistentVolumeClaim
 metadata:
   name: pvc-movies
 spec:
-  storageClassName: {{ .Values.persistence.storageClassName }}
   accessModes:
     - ReadWriteOnce
   resources:
