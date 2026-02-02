@@ -9,7 +9,6 @@ resources:
     memory: "500Mi"
 
 persistence:
-  storageClassName: standard
   configSize: "5Gi"
   cacheSize: "5Gi"
   mediaSize: "20Gi"
