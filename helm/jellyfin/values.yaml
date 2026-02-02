@@ -18,4 +18,6 @@ service:
   port: 8096
   nodePort: 30096
 
-# trigger another argo resync
+pilotedge:
+  enabled: false
+  pvcName: pvc-pe-audio

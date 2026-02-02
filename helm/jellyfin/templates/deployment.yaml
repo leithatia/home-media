@@ -27,9 +27,11 @@ spec:
         - name: movies-volume
           persistentVolumeClaim:
             claimName: pvc-movies
+      {{ if .Values.pilotedge.enabled }}
         - name: pe-volume
           persistentVolumeClaim:
-            claimName: pvc-pe-audio
+            claimName: {{ .Values.pilotedge.pvcName }}
+      {{ end }}
       containers:
         - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
@@ -49,8 +51,10 @@ spec:
               mountPath: /cache
             - name: movies-volume
               mountPath: /media/movies
+            {{ if .Values.pilotedge.enabled }}
             - name: pe-volume
               mountPath: /media/pe-audio
               readOnly: true
+            {{ end }}
   strategy:
     type: Recreate
